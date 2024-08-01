@@ -35,6 +35,7 @@ export function TripForm({ onSubmit, cnt, setCnt }: ITripFormProps) {
 			endDate: '14/3/2008',
 			destination: data.destination,
 			titleImage: keys.randomImage(`${cnt + 283}`),
+			tripOwnerUsername: 'Sara',
 		};
 		setCnt(cnt + 1);
 		await trigger(newTrip);

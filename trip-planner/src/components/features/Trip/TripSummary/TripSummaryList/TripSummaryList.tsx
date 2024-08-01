@@ -17,7 +17,7 @@ export function TripSummaryList({ trips }: ITripSummaryListProps) {
 			{trips.map((trip, index) => {
 				console.log(trip.titleImage);
 				return (
-					<NextLink key={index} href={`/my-trips/${trip.id}`}>
+					<NextLink key={index} href={`/my-trips/${trip.tripId}`}>
 						<TripSummaryCard trip={trip} />
 					</NextLink>
 				);

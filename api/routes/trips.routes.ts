@@ -17,16 +17,16 @@ export const mockTrips: ITripSummary[] = [
 		startDate: '30/10/2022',
 		endDate: '7/11/2022',
 		destination: 'France',
-		id: '1',
-		username: 'Sara',
+		tripId: '1',
+		tripOwnerUsername: 'Sara',
 	},
 	{
 		title: 'Bol na Braču',
 		startDate: '05/2019',
 		endDate: '06/2019',
 		destination: 'France',
-		id: '2',
-		username: 'Sara',
+		tripId: '2',
+		tripOwnerUsername: 'Sara',
 	},
 	{
 		title: 'Spain',
@@ -34,8 +34,8 @@ export const mockTrips: ITripSummary[] = [
 		startDate: '05/2019',
 		endDate: '06/2019',
 		destination: 'France',
-		id: '2',
-		username: 'Sara',
+		tripId: '2',
+		tripOwnerUsername: 'Sara',
 	},
 	{
 		title: 'Scandinavia - Finland, Sweden, Norway',
@@ -43,8 +43,8 @@ export const mockTrips: ITripSummary[] = [
 		startDate: '7/1/2003',
 		endDate: '18/1/2003',
 		destination: 'France',
-		id: '3',
-		username: 'Sara',
+		tripId: '3',
+		tripOwnerUsername: 'Sara',
 	},
 ];
 
@@ -64,16 +64,20 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
 	try {
 		const trips: ITripSummary[] = await getAllTripsByUser('Sara');
-
-		let filteredTrips = trips
-			.map((trip) => trip.id)
-			.sort((a, b) => parseInt(a) - parseInt(b))
-			.at(-1);
+		console.log(trips);
+		let filteredTrips =
+			trips && trips.length >= 1
+				? trips
+						.map((trip) => trip.tripId)
+						.filter((id) => id !== undefined)
+						.sort((a, b) => parseInt(a) - parseInt(b))
+						.at(-1)
+				: undefined;
 
 		const id: number = filteredTrips ? parseInt(filteredTrips) + 1 : 1;
-
+		console.log(id);
 		console.log('dobijes ovaj id ', id);
-		const trip = { ...req.body, username: 'Sara', id: `${id}` };
+		const trip = { ...req.body, tripOwnerUsername: 'Sara', tripId: `${id}` };
 		await insertTrip(trip);
 	} catch (err) {
 		console.log('ulovio sam', err);

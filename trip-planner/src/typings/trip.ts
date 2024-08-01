@@ -6,5 +6,6 @@ export interface ITripSummary {
 	startDate: string;
 	endDate: string;
 	destination: string;
-	id?: string;
+	tripId?: string;
+	tripOwnerUsername: string; //trip owner username
 }

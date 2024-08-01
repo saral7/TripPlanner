@@ -18,15 +18,19 @@ app.use(
 );
 app.use(bodyParser.json());
 
-import { mockTrips, router } from './routes/trips.routes.ts';
-import { insertTrip, insertUser } from './db-helpers.ts';
+import { mockTrips, router as tripsRouter } from './routes/trips.routes.ts';
+import { createDatabase, insertTrip, insertUser } from './db-helpers.ts';
 import { IUser } from './typings/user.ts';
-app.use('/trips', router);
+import { router as activitiesRouter } from './routes/activities.routes.ts';
+
+app.use('/trips', tripsRouter);
+app.use('/activities', activitiesRouter);
 
 const Sara: IUser = {
 	email: 'sara@sara.com',
 	password: '12345',
 	username: 'Sara',
 };
+insertUser(Sara);
 
 app.listen(5000, () => console.log('Listening on port 5000'));

@@ -7,4 +7,5 @@ export const keys = {
 const API = 'http://localhost:5000';
 export const swrKeys = {
 	trips: (id: string) => `${API}/trips${id}`,
+	activities: (tripId: string, tripOwnerUsername: string) => `${API}/activities/${tripOwnerUsername}/${tripId}`,
 };
