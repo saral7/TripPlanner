@@ -31,6 +31,5 @@ const Sara: IUser = {
 	password: '12345',
 	username: 'Sara',
 };
-insertUser(Sara);
 
 app.listen(5000, () => console.log('Listening on port 5000'));
